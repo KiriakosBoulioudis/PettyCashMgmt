@@ -32,8 +32,8 @@ public class PublicRequestServiceIml implements PublicRequestService {
 
    
    @Override
-   public List<PublicRequest> listDeliveredRequests() {
-      return publicRequestDao.listDeliveredRequests();
+   public List<PublicRequest> listDeliveredRequests(Integer userId, Date from, Date to) {
+      return publicRequestDao.listDeliveredRequests(userId, from, to);
    }
    
    @Override

@@ -4,7 +4,7 @@
 <%@page session="true"%>
 <html>
 <head>
-<title>Custodian Page</title>
+<title>Approved Requests Page</title>
 <style>
 .error {
 	padding: 15px;
@@ -51,65 +51,55 @@
 <body>
 
 	<div id="box">
-		<h1 align="center">Petty Cash Management Custodian</h1>
+		<h1 align="center">Petty Cash Management Approved Requests</h1>
 
 		<table>
 			<tr>
 				<td width="150px"><h3><a href="/pettycash">Main Page</a></h3></td>
-				<td width="150px" align="center"><h3><a href="/pettycash/custodio/approved/list">Approved List</a></h3></td>
+				<td width="150px" align="center"><h3><a href="/pettycash/custodio/view">Custodian Page</a></h3></td>
 				<td width="150px" align="center"><h3><a href="/pettycash/logout">Logout</a></h3></td>
 				<td width="150px" align="Right"><h3>User: ${username}</h3></td>
 			</tr>
 		</table>
 	</div>
-
+	
 	<div id="box">
 
-		<h2 align="center">Cash Balance</h2>
-		<c:if test="${not empty cashbalance}">
-			<div class="cashbalance">${cashbalance}</div>
-		</c:if>
-
-
-		<h2>Order Cash</h2>
-
-
-		<!-- 
-		<form name='loginForm'
-		  action="<c:url value='/j_spring_security_check' />" method='POST'>
-		-->
-		<form name='orderForm' action="<c:url value='/custodio/register' />"
-			method='POST'>
-
-			<table>
-				<tr>
-					<td>Amount:</td>
-					<td><input type='number' step="0.01" min="0.01"
-						max="10000000000" name='amount' required="required"></td>
-
-					<td colspan='2'><input name="submit" type="submit"
-						value="submit" /></td>
-				</tr>
-			</table>
-
-		</form>
-	</div>
-	
+		<h2>Request Approved Period:</h2>
 
 		<c:if test="${not empty error}">
-		<div id="box">
 			<div class="error">${error}</div>
-			</div>
 		</c:if>
 		<c:if test="${not empty msg}">
-		<div id="box">
 			<div class="msg">${msg}</div>
-		</div>
 		</c:if>
+
+		  <form name='PeriodForm'
+		  action="<c:url value='/custodio/approved/list' />" method='GET'>
+
+		<table>
+			<tr><td></td>
+			<td>The Parameters must be in the format: "yyyy-MM-dd HH:mm" <br/>
+				(example: "2017-10-22 16:30")</td></tr>
+			<tr>
+				<td>From:</td>
+				<td><input type="datetime" name='from'></td>
+			</tr>
+			<tr>
+				<td>To:</td>
+				<td><input type="datetime" name='to' /></td>
+			</tr>
+			<tr>
+				<td colspan='2'><input name="submit" type="submit"
+				  value="submit" /></td>
+			</tr>
+		  </table>
+		</form>
+	</div>
 
 
 	<div id="box">
-		<h2 align="center">Public Orders to approve</h2>
+		<h2 align="center">Approved Public Orders</h2>
 
 		<table class="table table-striped">
 			<thead>
@@ -117,8 +107,8 @@
 					<th>#ID</th>
 					<th>Name</th>
 					<th>Amount</th>
-					<th>Date</th>
-					<th>Approve</th>
+					<th>Requested Date</th>
+					<th>Approved Date</th>
 				</tr>
 			</thead>
 
@@ -128,14 +118,7 @@
 					<td width="150px" align="center">${request.requestUser.name}</td>
 					<td width="100px" align="center">${request.amount}</td>
 					<td width="200px" align="center">${request.requestDate}</td>
-
-					<td align="center"><spring:url
-							value="/custodio/approve/${request.id}" var="approveUrl" /> <form:form
-							class="btn btn-danger" method="post" action="${approveUrl}">
-							<input type="hidden" name="id" value="${request.id}" />
-							<input type="submit" name="menuButton" value="Approve" />
-
-						</form:form></td>
+					<td width="200px" align="center">${request.deliveryDate}</td>
 				</tr>
 			</c:forEach>
 		</table>

@@ -14,49 +14,45 @@ import org.springframework.web.servlet.ModelAndView;
 
 @RestController
 public class SecurityController {
-            
-    
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-	public ModelAndView login(@RequestParam(value = "error", required = false) String error,
-		@RequestParam(value = "logout", required = false) String logout) {
 
-	  ModelAndView model = new ModelAndView();
-	  if (error != null) {
-		model.addObject("error", "Invalid username and password!");
-	  }
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public ModelAndView login(@RequestParam(value = "error", required = false) String error){
 
-	  if (logout != null) {
-		model.addObject("msg", "You've been logged out successfully.");
-	  }
-	  model.setViewName("login");
+		ModelAndView model = new ModelAndView();
+		if (error != null) {
+			model.addObject("error", "Invalid username and password!");
+		}
 
-	  return model;
+		model.setViewName("login");
+
+		return model;
 
 	}
-    
-    
-    @RequestMapping(value = "/403", method = RequestMethod.GET)
-    public ModelAndView accesDenied()
-    {
-    	ModelAndView model = new ModelAndView();
-  	  
-  	  model.setViewName("403");
 
-  	  return model;
-    	
-    }
-    
-    
-    @RequestMapping(value="/logout", method = RequestMethod.GET)
-    public String logoutPage1 (HttpServletRequest request, HttpServletResponse response) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth != null){    
-            new SecurityContextLogoutHandler().logout(request, response, auth);
-        }
-        
-        //return "";
-        return "redirect:/login";//You can redirect wherever you want, but generally it's a good practice to show login screen again.
-    }   
+	@RequestMapping(value = "/403", method = RequestMethod.GET)
+	public ModelAndView accesDenied() {
+		ModelAndView model = new ModelAndView();
 
-  
+		model.setViewName("403");
+
+		return model;
+
+	}
+
+	@RequestMapping(value = "/logedout", method = RequestMethod.GET)
+	public ModelAndView logedOutPage(HttpServletRequest request, HttpServletResponse response) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (auth != null) {
+			new SecurityContextLogoutHandler().logout(request, response, auth);
+		}
+
+		ModelAndView model = new ModelAndView();
+		
+		model.addObject("msg", "You've been logged out successfully.");
+
+		model.setViewName("main");
+
+		return model;
+	}
+
 }

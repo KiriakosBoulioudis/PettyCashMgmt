@@ -1,5 +1,6 @@
 package com.pettycash.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import com.pettycash.exception.ObjectNotExistsInDBException;
@@ -9,7 +10,7 @@ public interface PublicRequestDAO
 {
 	   void add(PublicRequest request);
 	   
-	   List<PublicRequest> listDeliveredRequests();
+	   List<PublicRequest> listDeliveredRequests(Integer userId, Date from, Date to);
 	   
 	   List<PublicRequest> listNotDeliveredRequests();
 	   

@@ -1,5 +1,6 @@
 package com.pettycash.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -24,9 +25,15 @@ public class PublicReuestDAOImpl implements PublicRequestDAO {
    }
 
    @Override
-   public List<PublicRequest> listDeliveredRequests() {
-	   Query query = em.createQuery("FROM PublicRequest pr WHERE pr.delivered = ?1");
+   public List<PublicRequest> listDeliveredRequests(Integer userId, Date from, Date to) {
+	   Query query = em.createQuery("FROM PublicRequest pr WHERE pr.delivered = ?1 "
+	   		+ "AND pr.deliveryUser.id = ?2 "
+	   		+ "AND pr.deliveryDate >= ?3 "
+	   		+ "AND pr.deliveryDate <= ?4 ");
 		query.setParameter(1, true);
+		query.setParameter(2, userId);
+		query.setParameter(3, from);
+		query.setParameter(4, to);
 		@SuppressWarnings("unchecked")
 		List<PublicRequest> requests = (List<PublicRequest>) query.getResultList();
 

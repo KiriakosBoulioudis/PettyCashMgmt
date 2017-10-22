@@ -64,17 +64,16 @@
 
 		</form>
 	</div>
-	<div id="box">
-
-		<h2>Action Information</h2>
-
-		<c:if test="${not empty error}">
+	<c:if test="${not empty error}">
+		<div id="box">
 			<div class="error">${error}</div>
+			</div>
 		</c:if>
 		<c:if test="${not empty msg}">
+		<div id="box">
 			<div class="msg">${msg}</div>
+		</div>
 		</c:if>
-	</div>
 
 
 </body>

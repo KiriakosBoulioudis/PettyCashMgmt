@@ -12,7 +12,12 @@ import com.pettycash.exception.ObjectNotExistsInDBException;
 import com.pettycash.model.CustodianRequest;
 import com.pettycash.model.User;
 
-
+/**
+ * Implementation of the Custodian Request Service
+ * 
+ * @author Kiriakos Boulioudis
+ *
+ */
 @Service
 public class CustodianRequestServiceImpl implements CustodianRequestService {
 
