@@ -5,7 +5,7 @@ Access to the secured area if using the sql-scripts (DDL_pettycash.sql and DML_p
 are: (name:'custodio' with password:'custodio') and (name:'custodio2' with password:'custodio2')
 
 
-##Important Packages and Files
+## Important Packages and Files
 pom.xml
 dbscripts:									
 		- DDL_pettycash.sql
@@ -28,7 +28,7 @@ src\main\webapp\WEB-INF\views:
 
 
 ## Design
-###Database structure:
+### Database structure:
 user : The user of the application and the public user(name) which asked for money
 role : The possible roles that user can have in the application
 user_role : The Relation of user and roles.
@@ -36,19 +36,19 @@ public_request : The information of the public money requests.
 custodian_request : The information of the custodian money registrations.
 cash_balance : The current cash balance of a custodian.
 
-					|--------------|			|---------------|			|---------------|
-					| Cash_Balance |------------|	User		|-----------| User_Role		|
-					|--------------|			|---------------|			|---------------|
-													| 	| 	|
-													|	|	|				|---------------|
-													|	|	|---------------| Custodian_Req	|
-													|	|					|---------------|
-												|---------------|					
-												| Public_Req	|
-												|---------------|
+	|--------------|		|---------------|		|---------------|
+	| Cash_Balance |----------------|	User	|---------------| User_Role	|
+	|--------------|		|---------------|		|---------------|
+					| 	| 	|
+					|	|	|		|---------------|
+					|	|	|---------------| Custodian_Req	|
+					|	|			|---------------|
+					|---------------|					
+					| Public_Req	|
+					|---------------|
 
 												
-###Application Architecture	
+### Application Architecture	
 The Application is using the Spring Annotation Based Configuration without web.xml, the main configuration file: AppConfiguration.java.
 For the secured custodian area and session handling is used the Spring Security, configured at SecurityConfiguration.java
 The used Web-Framework is the Spring MVC with JPA and JTA using Hibernate.
@@ -65,13 +65,12 @@ Business-Layer: Service classes (package src\main\java\com\pettycash\service).
 Data Access Layer: Model and DAO classes (packages src\main\java\com\pettycash\ model and dao).
 
 
-
-
 ## Requirements
-Java jdk 
-Java Servlet Container Server (example: tomcat)
-Database (example: postgres)
-Maven 
+- Java jdk 
+- Java Servlet Container Server (example: tomcat)
+- Database (example: postgres)
+- Maven 
+
 
 ## Configuration
 The included pom.xml file can be used to retrieve the necessary libraries ,to compile the sources and generate the .war file of the application. 
@@ -84,12 +83,16 @@ like they are for the access at your environment.
 
 The Logging configuration can be changed at log4j.properties
 
+
 ## Run
-###Database
+### Database
 Execute at the database for the application the dbscripts: DDL_pettycash.sql and DML_pettycash.sql
 The database user for the application access must have the following priveleges:
+- SELECT, INSERT, UPDATE, DELETE on tables of schema public
+- USAGE, SELECT, UPDATE on sequences of schema public
+- USAGE on schema public
+- CONNECT on database
 
-###Application 
+### Application 
 The generated pettycash.war file can be deployed at a servlet container server (example tomcat).
 And can be accessed under the URL: server main path + /pettycash .
- # PettyCashMgmt
