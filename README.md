@@ -23,8 +23,9 @@ src\main\webapp\WEB-INF\views:
 		- main.jsp
 		- public.jsp
 		- custodio.jsp
-		
-
+		- approved.jsp
+		- login.jsp
+		- 403.jsp
 
 
 ## Design
