@@ -36,16 +36,16 @@ public_request : The information of the public money requests.
 custodian_request : The information of the custodian money registrations.
 cash_balance : The current cash balance of a custodian.
 
-					|--------------|			|---------------|			|---------------|
-					| Cash_Balance |------------|	User		|-----------| User_Role		|
-					|--------------|			|---------------|			|---------------|
-													| 	| 	|
-													|	|	|				|---------------|
-													|	|	|---------------| Custodian_Req	|
-													|	|					|---------------|
-												|---------------|					
-												| Public_Req	|
-												|---------------|
+	|--------------|		|---------------|		|---------------|
+	| Cash_Balance |----------------|	User	|---------------| User_Role	|
+	|--------------|		|---------------|		|---------------|
+					| 	| 	|
+					|	|	|		|---------------|
+					|	|	|---------------| Custodian_Req	|
+					|	|			|---------------|
+					|---------------|					
+					| Public_Req	|
+					|---------------|
 
 												
 ###Application Architecture	
@@ -65,13 +65,12 @@ Business-Layer: Service classes (package src\main\java\com\pettycash\service).
 Data Access Layer: Model and DAO classes (packages src\main\java\com\pettycash\ model and dao).
 
 
-
-
 ## Requirements
-Java jdk 
-Java Servlet Container Server (example: tomcat)
-Database (example: postgres)
-Maven 
+- Java jdk 
+- Java Servlet Container Server (example: tomcat)
+- Database (example: postgres)
+- Maven 
+
 
 ## Configuration
 The included pom.xml file can be used to retrieve the necessary libraries ,to compile the sources and generate the .war file of the application. 
@@ -84,6 +83,7 @@ like they are for the access at your environment.
 
 The Logging configuration can be changed at log4j.properties
 
+
 ## Run
 ###Database
 Execute at the database for the application the dbscripts: DDL_pettycash.sql and DML_pettycash.sql
@@ -92,4 +92,3 @@ The database user for the application access must have the following priveleges:
 ###Application 
 The generated pettycash.war file can be deployed at a servlet container server (example tomcat).
 And can be accessed under the URL: server main path + /pettycash .
- # PettyCashMgmt
