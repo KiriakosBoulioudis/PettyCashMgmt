@@ -88,8 +88,10 @@ The Logging configuration can be changed at log4j.properties
 ### Database
 Execute at the database for the application the dbscripts: DDL_pettycash.sql and DML_pettycash.sql
 The database user for the application access must have the following priveleges:
-- SELECT, INSERT, UPDATE, DELETE
-- CONNECT, USAGE
+- SELECT, INSERT, UPDATE, DELETE on tables of schema public
+- USAGE, SELECT, UPDATE on sequences of schema public
+- USAGE on schema public
+- CONNECT on database
 
 ### Application 
 The generated pettycash.war file can be deployed at a servlet container server (example tomcat).
